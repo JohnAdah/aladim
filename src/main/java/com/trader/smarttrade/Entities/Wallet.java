@@ -2,6 +2,7 @@ package com.trader.smarttrade.Entities;
 
 import com.trader.smarttrade.Utils.IdGenerator;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "wallet")
 public class Wallet {
     @Id
@@ -19,11 +21,9 @@ public class Wallet {
 
     @Column(name = "balance")
     private Double walletAmount;
-//
-//    @OneToOne()
-//    private Users user;
 
-    @OneToMany(mappedBy = "wallet_id", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Transact> transact;
 
     public Wallet(){

@@ -1,10 +1,7 @@
 package com.trader.smarttrade.Entities;
 
 import com.trader.smarttrade.Utils.IdGenerator;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -14,6 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "merchant_response")
 public class MerchantResponse {
@@ -22,11 +20,14 @@ public class MerchantResponse {
     private String responseId;
 
     @ManyToOne()
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private Users user;
+
+    @ManyToOne()
     @JoinColumn(name = "request_id",referencedColumnName = "request_id")
-    private UserRequest request_Id;
+    private UserRequest request;
 
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date")
     private LocalDate responseDate;
 
@@ -35,10 +36,6 @@ public class MerchantResponse {
 
     @Column(name = "description", length = 512)
     private String responseDescription;
-
-    @ManyToOne()
-    @JoinColumn(name = "merchant_id", referencedColumnName = "id")
-    private Merchants merchant;
 
     @Column(name = "image_url")
     private String imageUrl;

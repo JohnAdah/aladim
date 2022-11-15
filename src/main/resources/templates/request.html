@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="userheader :: userheader"></div>
+
+<body>
+<div>
+    <div th:replace="userheader :: usernavbar"></div>
+</div>
+
+<div class="container" style="padding-top: 50px; padding-bottom: 20px;">
+    <div class="row col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-left">Product/Service Request</h2>
+            </div>
+            <div class="card-body">
+                <form role="form" method="post" th:action="@{/new/request}" th:object="${requestObject}">
+                    <div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label class="form-label">Title</label>
+                                <input type="text" class="form-control" id="title" name="title" th:field="*{title}" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Decription</label>
+                            <textarea class="form-control" row="5" cols="25" id="description" placeholder="Decribe details of product or service required here"
+                                      th:field="*{description}"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="display: flex ; justify-content: space-between ; align-items:center ">
+                        <div class="mb-2 col">
+                            <label class="form-label">Min. Price</label>
+                            <input type="number" class="form-control" id="minPrice" name="minPrice" th:field="*{requestMinPrice}" />
+                        </div>
+                        <div class="mb-2 col">
+                            <label class="form-label">Max. Price</label>
+                            <input type="number" class="form-control" id="maxPrice" name="maxPricer" th:field="*{requestMaxPrice}" />
+                        </div>
+                        <div class="mb-3 col">
+                            <label class="form-label">Category</label>
+                            <select  class="form-select"name="category", id="category">
+                                <option th:each="categoryOption: ${T(com.trader.smarttrade.Enums.Category).values()}"
+                                        th:value="${categoryOption}" th:text="${categoryOption}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="mb-3 col">
+                            <label class="form-label">Select sample image of product</label>
+                            <input class="form-control" type="file" id="formFile" onchange="preview()">
+                            <button onclick="clearImage()" class="btn btn-dark mt-3" th:field="*{imageUrl}">Click me</button>
+                        </div>
+                        <div class="ui-icon-image">
+                            <img id="frame" src="" class="img-fluid" />
+                        </div>
+
+                    </div>
+
+
+                    <div class="mt-4">
+                        <button type="submit" id="submit-btn" class="btn btn-success mt3">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./js/style.js"></script>
+<script>
+    function preview() {
+        frame.src = URL.createObjectURL(event.target.files[0]);
+
+    }
+    function clearImage() {
+        document.getElementById('formFile').value = null;
+        frame.src = "";
+    }
+</script>
+<div th:replace="footer :: footer"></div>
+</body>
+
+</html>
+

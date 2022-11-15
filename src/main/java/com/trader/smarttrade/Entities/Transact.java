@@ -6,6 +6,7 @@ import com.trader.smarttrade.Enums.TransactionStatus;
 import com.trader.smarttrade.Utils.IdGenerator;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -39,8 +40,10 @@ public class Transact {
     @Column(name = "payment_status", nullable = false)
     private PaymentStatus paymentConfirmationStatus;
 
+
     @Column(name = "confirmed_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "dd-mm-yy HH:MM")
     private Date confirmationDate;
 
     @Enumerated(EnumType.STRING)
@@ -49,12 +52,10 @@ public class Transact {
 
     @ManyToOne()
     @JoinColumn(name = "wallet_id", referencedColumnName = "wallet_id")
-    private Wallet wallet_id;
+    private Wallet wallet;
 
     public Transact(){
-        int count = 1;
-        this.transactionId = IdGenerator.transactionIdGenerator("TRN0", count);
-        count++;
+        this.transactionId = IdGenerator.transactionIdGenerator("TRN0");
     }
 
 

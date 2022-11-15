@@ -1,14 +1,10 @@
 package com.trader.smarttrade.Entities;
 
-import com.sun.istack.NotNull;
-import com.trader.smarttrade.Enums.Gender;
 import com.trader.smarttrade.Enums.IdentityType;
-import com.trader.smarttrade.Enums.Roles;
+import com.trader.smarttrade.Enums.UserRole;
 import com.trader.smarttrade.Utils.IdGenerator;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -42,10 +38,6 @@ public class Users {
     @Column(name = "password", length = 20, nullable = false)
     private String password;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private Gender sex;
-
     @Column(name = "date_of_registration")
     @CreationTimestamp()
     @Temporal(TemporalType.DATE)
@@ -65,15 +57,14 @@ public class Users {
     private Address homeAddress;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Roles role;
+    @Column(name = "roles")
+    private UserRole role;
 
-    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<UserRequest> requests;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "merchant_id", referencedColumnName = "id")
-    private Merchants merchant;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    private List<MerchantResponse> responses;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wallet_id", referencedColumnName = "wallet_id")
@@ -86,5 +77,9 @@ public class Users {
         String prefix = "USR";
         this.userId = IdGenerator.customIdGenerator(prefix,100,200);
         this.wallet = new Wallet();
+    }
+
+    public Users(Wallet wallet) {
+        this.wallet = wallet;
     }
 }

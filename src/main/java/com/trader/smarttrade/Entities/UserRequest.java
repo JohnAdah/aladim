@@ -1,13 +1,9 @@
 package com.trader.smarttrade.Entities;
 
-import com.trader.smarttrade.Enums.MerchantCategory;
+import com.trader.smarttrade.Enums.Category;
 import com.trader.smarttrade.Utils.IdGenerator;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,6 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 @Table(name = "user_request")
 public class UserRequest {
@@ -25,18 +22,16 @@ public class UserRequest {
         @Column(name = "request_id", nullable = false)
         private String requestId;
 
-        @Column(name = "merchant_category",nullable = false)
-        @Enumerated(EnumType.STRING)
-        private MerchantCategory requestCategory;
+        @Column(name = "title", length = 50)
+        private String title;
 
         @CreationTimestamp()
-        @Temporal(TemporalType.TIMESTAMP)
         @Column(name="request_date")
         private Date requestDate;
 
         @ManyToOne()
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-        private Users user_id;
+        private Users user;
 
         @Column(name="max_price", nullable = false)
         private Double requestMaxPrice;
@@ -47,7 +42,14 @@ public class UserRequest {
         @Column(name="image_url",nullable = true)
         private String imageUrl;
 
-        @OneToMany(mappedBy = "request_Id", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+        @Enumerated(EnumType.STRING)
+        @Column(name = "Cateegory")
+        private Category category;
+
+        @Column(name = "description", length = 512)
+        private String description;
+
+        @OneToMany(mappedBy = "request", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
         List<MerchantResponse> responses;
 
 

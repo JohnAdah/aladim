@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="merchantheader :: merchantheader"></div>
+
+<body>
+<div>
+    <div th:replace="merchantheader :: merchantnavbar"></div>
+</div>
+
+<div class="" style="display: grid; grid-template-columns: 1fr 5fr;height: auto;">
+    <div style="background-color: grey;"></div>
+    <div>
+        <div class="container" style="padding-top: 50px;">
+            <div class="row col-md-8 offset-md-2">
+                <div class="flex-content" style="display: -ms-flex; flex-direction: column; justify-content: space-evenly">
+                    <h2>Request List</h2>
+                    <input type="text" class="form-control" name="category" id="search" placeholder="category" />
+                    <hr>
+                </div>
+
+                <div class="card" style="margin-bottom: 10px;" th:each="request, requestStat:${viewRequest}">
+                    <div class="card-header" style="display: flex; padding-top: 5px;margin: 10px;">
+                        <div class="mb-5 col-sm-8" style="display: -ms-flexbox; height: fit-content;">
+                            <p th:text="${request.category}"><b></b></p>
+                            <h5 th:text="${request.title}"></h5>
+                        </div>
+                        <div class="mb-5 col">
+                            <p th:text="${request.requestDate}"></p>
+                        </div>
+                    </div>
+                    <div class="card-body"
+                         style="border:1px solid; display:flex;padding:5px; justify-content: space-evenly; ">
+                        <p>Price Range:N<span th:text="${request.requestMinPrice}"></span> - N
+                            <span th:text="${request.requestMaxPrice}"></span></p>
+                        <button type="submit" id="submit-btn" class="btn btn-success mt3">View Details</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

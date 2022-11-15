@@ -2,17 +2,20 @@ package com.trader.smarttrade.DTOs;
 
 
 import com.trader.smarttrade.Entities.Address;
-import com.trader.smarttrade.Enums.Gender;
 import com.trader.smarttrade.Enums.IdentityType;
-import com.trader.smarttrade.Enums.Roles;
+import com.trader.smarttrade.Enums.UserRole;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.Date;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class RegisterUserDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserDTO {
+
+    private String userId;
 
     private String userName;
 
@@ -24,8 +27,6 @@ public class RegisterUserDTO {
 
     private String password;
 
-    private Gender sex;
-
     private String phoneNumber;
 
     private IdentityType idType;
@@ -34,6 +35,6 @@ public class RegisterUserDTO {
 
     private Address homeAddress;
 
-    private Roles role;
+    private UserRole role;
 
 }

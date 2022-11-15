@@ -2,7 +2,6 @@ package com.trader.smarttrade.RepositoryTest;
 
 import com.trader.smarttrade.Entities.UserRequest;
 import com.trader.smarttrade.Entities.Users;
-import com.trader.smarttrade.Enums.MerchantCategory;
 import com.trader.smarttrade.Repositories.UserRequestRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

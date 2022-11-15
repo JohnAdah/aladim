@@ -29,8 +29,9 @@ public class IdGenerator {
         return Long.parseLong( partB + partB);
     }
 
-    public static String transactionIdGenerator(String prefix, int count){
-        String suffix = Integer.toString(count);
+    static int count = 0;
+    public static String transactionIdGenerator(String prefix){
+        String suffix = Integer.toString(count++);
         return prefix + suffix;
     }
 }

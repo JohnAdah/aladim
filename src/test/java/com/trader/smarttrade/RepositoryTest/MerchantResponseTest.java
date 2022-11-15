@@ -2,7 +2,6 @@ package com.trader.smarttrade.RepositoryTest;
 
 
 import com.trader.smarttrade.Entities.MerchantResponse;
-import com.trader.smarttrade.Entities.Merchants;
 import com.trader.smarttrade.Repositories.MerchantResponseRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

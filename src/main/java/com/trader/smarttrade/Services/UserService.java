@@ -1,13 +1,14 @@
 package com.trader.smarttrade.Services;
 
+import com.trader.smarttrade.DTOs.UserDTO;
 import com.trader.smarttrade.Entities.Users;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@Service
 public interface UserService {
-        void CreateUser(Users user, String role);
+        void CreateUser(UserDTO user);
         void UpdateUser(Users user);
         Users GetUser(String id);
         List<Users> GetAllUsers();

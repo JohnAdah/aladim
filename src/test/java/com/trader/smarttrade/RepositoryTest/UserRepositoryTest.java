@@ -2,18 +2,14 @@ package com.trader.smarttrade.RepositoryTest;
 
 
 import com.trader.smarttrade.Entities.Address;
-import com.trader.smarttrade.Entities.Merchants;
 import com.trader.smarttrade.Entities.Users;
 import com.trader.smarttrade.Enums.IdentityType;
-import com.trader.smarttrade.Enums.MerchantCategory;
-import com.trader.smarttrade.Enums.Roles;
+import com.trader.smarttrade.Enums.UserRole;
 import com.trader.smarttrade.Repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Optional;
 
 
@@ -54,7 +50,7 @@ public class UserRepositoryTest {
         user.setEmail("kon4aet@gmail.com");
         user.setIdNumber(10000004L);
         user.setIdType(IdentityType.VOTERS_CARD);
-        user.setRole(Roles.MERCHANT);
+        user.setRole(UserRole.MERCHANT);
         user.setHomeAddress(address);
         user.setPassword("japa");
         user.setMerchant(merchant);
@@ -89,7 +85,7 @@ public class UserRepositoryTest {
         user.setEmail("kon4aet@gmail.com");
         user.setIdNumber(10000004L);
         user.setIdType(IdentityType.VOTERS_CARD);
-        user.setRole(Roles.MERCHANT);
+        user.setRole(UserRole.MERCHANT);
         user.setHomeAddress(address);
         user.setPassword("japa");
         user.setMerchant(merchant);

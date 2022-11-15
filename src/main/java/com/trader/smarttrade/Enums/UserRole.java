@@ -2,7 +2,9 @@ package com.trader.smarttrade.Enums;
 
 import lombok.Getter;
 
+@Getter
 
-public enum PaymentStatus {
-    PENDING,SUCCESSFUL,UNSUCCESSFUL
+public enum UserRole {
+    MERCHANT,
+    USER
 }

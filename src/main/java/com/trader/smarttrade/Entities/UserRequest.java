@@ -4,12 +4,14 @@ import com.trader.smarttrade.Enums.Category;
 import com.trader.smarttrade.Utils.IdGenerator;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 
+//@ToString(exclude = "imageUrl")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -39,11 +41,14 @@ public class UserRequest {
         @Column(name="min_price",nullable = false)
         private Double requestMinPrice;
 
+        @Lob
         @Column(name="image_url",nullable = true)
-        private String imageUrl;
+        private byte[] imageUrl;
 
+        @Transient
+        private MultipartFile imageUrlPart;
         @Enumerated(EnumType.STRING)
-        @Column(name = "Cateegory")
+        @Column(name = "Category")
         private Category category;
 
         @Column(name = "description", length = 512)
@@ -58,6 +63,19 @@ public class UserRequest {
                 this.requestId = IdGenerator.customIdGenerator(prefix,200,300);
         }
 
-
-
+        @Override
+        public String toString() {
+                return "UserRequest{" +
+                        "requestId='" + requestId + '\'' +
+                        ", title='" + title + '\'' +
+                        ", requestDate=" + requestDate +
+                        ", user=" + user +
+                        ", requestMaxPrice=" + requestMaxPrice +
+                        ", requestMinPrice=" + requestMinPrice +
+                        ", imageUrl='" + imageUrl + '\'' +
+                        ", category=" + category +
+                        ", description='" + description + '\'' +
+                        ", responses=" + responses +
+                        '}';
+        }
 }

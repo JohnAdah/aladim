@@ -24,12 +24,9 @@ public class UserRequestTest {
         Users newUser = new Users();
         newUser.setUserId("USR091122154555116");
         UserRequest request = new UserRequest();
-        request.setRequestCategory(MerchantCategory.FASHION);
         request.setRequestMinPrice(2000.00);
         request.setRequestMaxPrice(3900.06);
         request.setImageUrl("check/the/image.url");
-        request.setUser_id(newUser);
-
         requestRepo.save(request);
 
     }

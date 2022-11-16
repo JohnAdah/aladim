@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+//@ToString(exclude = "imageUrl")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -73,6 +74,7 @@ public class Users {
     //By default, creating a new user should also generate a wallet id and set the
     // initial amount in the wallet to Zero.
 
+
     public Users(){
         String prefix = "USR";
         this.userId = IdGenerator.customIdGenerator(prefix,100,200);
@@ -81,5 +83,26 @@ public class Users {
 
     public Users(Wallet wallet) {
         this.wallet = wallet;
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", dateOfRegistration=" + dateOfRegistration +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", idType=" + idType +
+                ", idNumber=" + idNumber +
+                ", homeAddress=" + homeAddress +
+                ", role=" + role +
+                ", requests=" + requests +
+                ", responses=" + responses +
+                ", wallet=" + wallet +
+                '}';
     }
 }

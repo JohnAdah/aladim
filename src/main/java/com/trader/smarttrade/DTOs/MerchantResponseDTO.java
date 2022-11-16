@@ -30,5 +30,5 @@ public class MerchantResponseDTO {
 
     private String responseDescription;
 
-    private String imageUrl;
+    private byte[] imageUrl;
 }

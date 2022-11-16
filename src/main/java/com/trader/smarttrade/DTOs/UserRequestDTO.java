@@ -29,7 +29,7 @@ public class UserRequestDTO {
 
     private Double requestMinPrice;
 
-    private String imageUrl;
+    private byte[] imageUrl;
 
     private Category category;
 

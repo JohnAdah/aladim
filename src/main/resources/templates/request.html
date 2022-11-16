@@ -15,7 +15,7 @@
                 <h2 class="text-left">Product/Service Request</h2>
             </div>
             <div class="card-body">
-                <form role="form" method="post" th:action="@{/new/request}" th:object="${requestObject}">
+                <form role="form" method="post" enctype="multipart/form-data" th:action="@{/new/request}" th:object="${requestObject}">
                     <div>
                         <div class="row">
                             <div class="mb-3 col">
@@ -52,7 +52,7 @@
                     <div>
                         <div class="mb-3 col">
                             <label class="form-label">Select sample image of product</label>
-                            <input class="form-control" type="file" id="formFile" onchange="preview()">
+                            <input class="form-control" name="file" type="file" id="formFile" onchange="preview()">
                             <button onclick="clearImage()" class="btn btn-dark mt-3" th:field="*{imageUrl}">Click me</button>
                         </div>
                         <div class="ui-icon-image">

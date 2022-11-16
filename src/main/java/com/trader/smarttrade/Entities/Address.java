@@ -19,6 +19,7 @@ public class Address {
     private String addressLine2;
     @Column(name = "local_gov_area", length = 20, nullable = false)
     private String localGovArea;
+
     @Column(name = "city", length = 20, nullable = false)
     private String city;
     @Column(name = "state_of_city", length = 20, nullable = false)

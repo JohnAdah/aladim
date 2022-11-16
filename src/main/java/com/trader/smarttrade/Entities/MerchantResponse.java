@@ -38,7 +38,7 @@ public class MerchantResponse {
     private String responseDescription;
 
     @Column(name = "image_url")
-    private String imageUrl;
+    private byte[] imageUrl;
 
     public MerchantResponse() {
         String prefix = "RS";

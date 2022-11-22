@@ -9,23 +9,22 @@ import javax.persistence.Embeddable;
 
 @Getter
 @Setter
-@Data
 
 @Embeddable
 public class Address {
-    @Column(name = "address_line1", length = 50, nullable = false)
+    @Column(name = "address_line1", nullable = false)
     private String addressLine1;
-    @Column(name = "address_line2", length = 50, nullable = false)
+    @Column(name = "address_line2", nullable = false)
     private String addressLine2;
-    @Column(name = "local_gov_area", length = 20, nullable = false)
+    @Column(name = "local_gov_area",  nullable = false)
     private String localGovArea;
 
-    @Column(name = "city", length = 20, nullable = false)
+    @Column(name = "city", nullable = false)
     private String city;
-    @Column(name = "state_of_city", length = 20, nullable = false)
+    @Column(name = "state_of_city", nullable = false)
     private String stateOfCity;
-    @Column(name = "postal_code", length = 20, nullable = true)
+    @Column(name = "postal_code",  nullable = true)
     private int postalCode;
-    @Column(name = "country", length = 20, nullable = false)
+    @Column(name = "country",  nullable = false)
     private String country;
 }

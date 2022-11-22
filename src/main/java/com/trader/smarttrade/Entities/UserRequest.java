@@ -4,9 +4,9 @@ import com.trader.smarttrade.Enums.Category;
 import com.trader.smarttrade.Utils.IdGenerator;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@Data
 @Builder
 @Entity
 @Table(name = "user_request")
@@ -24,7 +23,7 @@ public class UserRequest {
         @Column(name = "request_id", nullable = false)
         private String requestId;
 
-        @Column(name = "title", length = 50)
+        @Column(name = "title")
         private String title;
 
         @CreationTimestamp()
@@ -41,12 +40,9 @@ public class UserRequest {
         @Column(name="min_price",nullable = false)
         private Double requestMinPrice;
 
-        @Lob
-        @Column(name="image_url",nullable = true)
-        private byte[] imageUrl;
+        @Column(name="imageUrl",nullable = true)
+        private String imageUrl;
 
-        @Transient
-        private MultipartFile imageUrlPart;
         @Enumerated(EnumType.STRING)
         @Column(name = "Category")
         private Category category;
@@ -63,19 +59,4 @@ public class UserRequest {
                 this.requestId = IdGenerator.customIdGenerator(prefix,200,300);
         }
 
-        @Override
-        public String toString() {
-                return "UserRequest{" +
-                        "requestId='" + requestId + '\'' +
-                        ", title='" + title + '\'' +
-                        ", requestDate=" + requestDate +
-                        ", user=" + user +
-                        ", requestMaxPrice=" + requestMaxPrice +
-                        ", requestMinPrice=" + requestMinPrice +
-                        ", imageUrl='" + imageUrl + '\'' +
-                        ", category=" + category +
-                        ", description='" + description + '\'' +
-                        ", responses=" + responses +
-                        '}';
-        }
 }

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<div th:replace="userheader :: userheader"></div>
+
+<div th:replace="merchant/merchantheader :: merchantheader"></div>
 
 <body>
 <div>
-    <div th:replace="userheader :: usernavbar"></div>
+    <div th:replace="merchant/merchantheader :: merchantnavbar"></div>
 </div>
 
-<div class="container" style="margin: 50px; width:60%;" th:field="${requestKey}">
+<div class="container" style="margin: 50px; width:60%;" th:field="*{response}">
 
     <!-- Card deck -->
     <div class="card-deck row">
@@ -17,9 +18,8 @@
         <div class="card">
 
             <!--Card image-->
-            <div class="view overlay">
-                <img class="card-img-top" th:src="${'data:image/jpeg;base64'+ ${requestKey.imageUrl}}">
-                     alt="Card image cap">
+            <div class="ui-widget-overlay">
+                <img class="card-img-top" th:src="${response.imageUrl}"/>
                 <a href="#!">
                     <div class="mask rgba-white-slight"></div>
                 </a>
@@ -29,12 +29,13 @@
             <div class="card-body">
                 <div style="display: -ms-flex; justify-content: space-evenly;">
                     <!--Title-->
-                    <h4 class="card-title" th:text="${requestKey.title}">1 Card title</h4>
-                    <h4 class="card-title" th:field="${requestKey.requestDate}"> Date of entry</h4>
+                    <h4 class="card-title" th:text="${response.responseId}">1 Card title</h4>
+                    <h4 class="card-title" th:text="${response.responseDate}"> Date of entry</h4>
                 </div>
                 <!--Text-->
-                <p th:text="${requestKey.category}"></p>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                <p th:text="${response.request.requestId}"></p>
+                <p th:text="${response.request.title}"><b></b></p>
+                <p class="card-text" th:text="${response.responseDescription}">Some quick example text to build on the card title and make up the bulk of the
                     card's content.</p>
                 <div>
                     <button type="button" class="btn btn-primary">Update</button>
@@ -48,7 +49,7 @@
 
     </div>
 </div>
-    <!-- Card -->
+<!-- Card -->
 <div th:replace="footer :: footer"></div>
 </body>
 

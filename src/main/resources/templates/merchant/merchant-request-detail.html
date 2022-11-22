@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="merchant/merchantheader :: merchantheader"></div>
+
+<body>
+<div>
+    <div th:replace="merchant/merchantheader :: merchantnavbar"></div>
+</div>
+
+<div class="" style="display: grid; grid-template-columns: 1fr 5fr;">
+    <div style="background-color: lightgrey;"></div>
+    <div class="container" style="margin: 50px; width:60%;" th:field="*{req}">
+
+        <!-- Card deck -->
+        <div class="card-deck row">
+
+            <!-- Card -->
+            <div class="card">
+
+                <!--Card image-->
+                <div class="ui-widget-overlay">
+                    <img class="card-img-top" th:src="${req.imageUrl}"/>
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!--Card content-->
+                <div class="card-body">
+                    <div>
+                        <p>N<span th:text="${req.requestMinPrice}"></span> - N<span th:text="${req.requestMaxPrice}"></span></p>
+                    </div>
+                    <div style="display: -ms-flex; justify-content: space-evenly;">
+                        <!--Title-->
+                        <h4 class="card-title" th:text="${req.title}">1 Card title</h4>
+                        <h4 class="card-title" th:text="${req.requestDate}"> Date of entry</h4>
+                    </div>
+                    <!--Text-->
+                    <p th:text="${req.category}"></p><br>
+                    <p class="card-text" th:text="${req.description}"></p><br>
+                    <p>Location: <span th:text="${req.user.homeAddress.localGovArea}"></span>,
+                        <span th:text="${req.user.homeAddress.city}"></span></p>
+                    <hr>
+                    <div>
+                        <a th:href="@{/response/{requestId}/(requestId=${req.requestId})}" class="btn btn-primary mt3">Send Proposal</a>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Card -->
+
+        </div>
+    </div>
+</div>
+<!-- Card -->
+<div th:replace="footer :: footer"></div>
+</body>
+
+</html>

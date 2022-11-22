@@ -9,13 +9,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
-//@ToString(exclude = "imageUrl")
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder
-@Data
 @Entity
 @Table(name = "users")
 public class Users {
@@ -24,19 +21,19 @@ public class Users {
     @Column(name = "user_id")
     private String userId;
 
-    @Column(name = "user_name",length = 20, nullable = false, unique = true)
+    @Column(name = "user_name", nullable = false, unique = true)
     private String userName;
 
-    @Column(name = "first_name", length = 20, nullable = false)
+    @Column(name = "first_name",  nullable = false)
     private String firstName;
 
-    @Column(name = "last_name",length = 20, nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email",length = 40, nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", length = 20, nullable = false)
+    @Column(name = "password",  nullable = false)
     private String password;
 
     @Column(name = "date_of_registration")
@@ -44,14 +41,14 @@ public class Users {
     @Temporal(TemporalType.DATE)
     private Date dateOfRegistration;
 
-    @Column(name = "phone_number", length = 11, nullable = false)
+    @Column(name = "phone_number",  nullable = false)
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "identification_type", length = 40, nullable = false)
+    @Column(name = "identification_type",  nullable = false)
     private IdentityType idType;
 
-    @Column(name = "identification_number", length = 25, nullable = false, unique = true)
+    @Column(name = "identification_number",  nullable = false, unique = true)
     private Long idNumber;
 
     @Embedded
@@ -85,24 +82,24 @@ public class Users {
         this.wallet = wallet;
     }
 
-    @Override
-    public String toString() {
-        return "Users{" +
-                "userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", dateOfRegistration=" + dateOfRegistration +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", idType=" + idType +
-                ", idNumber=" + idNumber +
-                ", homeAddress=" + homeAddress +
-                ", role=" + role +
-                ", requests=" + requests +
-                ", responses=" + responses +
-                ", wallet=" + wallet +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Users{" +
+//                "userId='" + userId + '\'' +
+//                ", userName='" + userName + '\'' +
+//                ", firstName='" + firstName + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", email='" + email + '\'' +
+//                ", password='" + password + '\'' +
+//                ", dateOfRegistration=" + dateOfRegistration +
+//                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", idType=" + idType +
+//                ", idNumber=" + idNumber +
+//                //", homeAddress=" + homeAddress +
+//                ", role=" + role +
+//                ", requests=" + requests +
+//                ", responses=" + responses +
+//                ", wallet=" + wallet +
+//                '}';
+//    }
 }

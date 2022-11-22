@@ -30,11 +30,12 @@
       <p>Welcome! <span> User</span>!</p>
     </div>
     <div class="nav-items">
-      <li><a href="profile.html">Profile</a></li>
-      <li><a href="request.html">Log Request</a></li>
-      <li><a href="allrequests.html">History</a></li>
-      <li><a href="wallet.html">Wallet</a></li>
+      <li><a href="../profile.html">Profile</a></li>
+      <li><a th:href="request.html">Log Request</a></li>
+      <li><a th:href="@{/allrequests}">History</a></li>
+      <li><a href="../wallet.html">Wallet</a></li>
       <li><a href="transact.html">Transactions</a></li>
+      <li><a th:href="@{/logout}">Logout</a></li>
     </div>
   </div>
 

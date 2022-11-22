@@ -34,6 +34,11 @@ public class RegistrationController {
         return "/successful";
     }
 
+    @GetMapping("/")
+    public String homePage(){
+        return "/home";
+    }
+
 
 
 }

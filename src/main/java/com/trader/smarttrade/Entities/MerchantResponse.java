@@ -37,11 +37,10 @@ public class MerchantResponse {
     @Column(name = "description", length = 512)
     private String responseDescription;
 
-    @Column(name = "image_url")
-    private byte[] imageUrl;
+    @Column(name = "imageUrl")
+    private String imageUrl;
 
     public MerchantResponse() {
-        String prefix = "RS";
-        this.responseId = IdGenerator.customIdGenerator(prefix,600,800);
+
     }
 }

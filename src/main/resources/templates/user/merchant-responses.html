@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-
-<div th:replace="userheader :: userheader"></div>
+<div th:replace="user/userheader :: userheader"></div>
 
 <body>
 <div>
-    <div th:replace="userheader :: usernavbar"></div>
+    <div th:replace="user/userheader :: usernavbar"></div>
 </div>
+
 
 <div class="" style="display: grid; grid-template-columns: 1fr 5fr;">
     <div style="background-color: lightgrey;"></div>
@@ -15,26 +15,27 @@
         <div class="container" style="padding-top: 50px;">
             <div class="row col-md-8 offset-md-2">
                 <div>
-                    <h2>Request List</h2>
+                    <h2>Proposal List</h2>
                     <hr>
                 </div>
-                <div class="card"  style="margin-bottom: 10px;" th:each = "request, requestStat:${requestKey}">
+                <div class="card" style="margin-bottom: 10px;" th:each="response, responseStat:${key}">
                     <div class="card-header" style="display: flex; padding-top: 5px;margin: 10px;">
                         <div class="mb-5 col-sm-8" style="display: -ms-flexbox; height: fit-content;">
-                            <p th:text="${request.requestId}"></p>
-                            <h5 th:text="${request.title}"></h5>
+                            <p th:text="${response.responseId}"></p>
+                            <h5 th:text="${response.request.title}"></h5>
                         </div>
                         <div class="mb-5 col">
-                            <p th:text="${request.requestDate}"></p>
+                            <p th:text="${response.responseDate}"></p>
                         </div>
-                    </div >
+                    </div>
                     <div class="card-body"
                          style="border:1px solid; display:flex;padding:5px; justify-content: space-evenly; ">
                         <div style="display: -ms-flex">
-                            <p>N<span th:text="${request.requestMinPrice}"></span> - N<span th:text="${request.requestMaxPrice}"></span></p>
+                            <p>N<span th:text="${response.responsePrice}"></span></p>
                         </div>
-                        <a th:href="@{/view/details/request/{requestId}/view(requestId=${request.requestId})}" class="btn btn-success mt3">View Details</a>
-                        <a th:href="@{/view/merchant/responses/{requestId}/view(requestId=${request.requestId})}" class="btn btn-success mt3">Proposals</a>
+                        <a th:href="@{/view/details/response/{responseId}(responseId=${response.responseId})}"
+                           class="btn btn-success mt3">View Details</a>
+                        <a class="btn btn-success mt3">Transact</a>
                     </div>
                 </div>
 
@@ -45,4 +46,5 @@
 
 <div th:replace="footer :: footer"></div>
 </body>
+
 </html>

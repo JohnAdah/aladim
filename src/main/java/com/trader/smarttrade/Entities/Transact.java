@@ -14,6 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+
 @Table(name = "Transact")
 public class Transact {
     @Id

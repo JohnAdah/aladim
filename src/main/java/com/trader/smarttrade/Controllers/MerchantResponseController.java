@@ -4,7 +4,6 @@ import com.trader.smarttrade.DTOs.MerchantResponseDTO;
 import com.trader.smarttrade.DTOs.UserRequestDTO;
 import com.trader.smarttrade.Entities.MerchantResponse;
 import com.trader.smarttrade.Entities.UserRequest;
-import com.trader.smarttrade.Entities.Users;
 import com.trader.smarttrade.Services.MerchantResponseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +26,7 @@ public class MerchantResponseController {
         this.merchantResponseService = merchantResponseService;
     }
 
-    @GetMapping("/response/{requestId}")
+    @GetMapping("/merchant/response/{requestId}")
     public String responseToRequest(@PathVariable("requestId") String requestId, Model model){
         log.info("Logging the request id @ 0: " + requestId);
         MerchantResponseDTO responseDTO = new MerchantResponseDTO();
@@ -40,7 +39,7 @@ public class MerchantResponseController {
     }
 
 
-    @PostMapping ("/new/response")
+    @PostMapping ("/merchant/new/response")
     public String newResponse(@ModelAttribute MerchantResponseDTO response, Model model,
                               @RequestParam("requestId") String requestId,
                               @RequestParam("file") MultipartFile file) throws IOException {
@@ -73,10 +72,12 @@ public class MerchantResponseController {
         return "merchant/merchant-request-detail";
     }
 
-    @GetMapping("/view/details/response/{responseId}/view")
+    @GetMapping("merchant/view/details/response/{responseId}/view")
     public String viewOneResponseDetails(@PathVariable("responseId") String responseId, Model model){
         MerchantResponseDTO response = merchantResponseService.viewOneResponse(responseId);
         model.addAttribute("response",response);
         return "merchant/response-details";
     }
+
+
 }

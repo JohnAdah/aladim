@@ -27,12 +27,12 @@
 
   <div style="display: flex">
     <div>
-      <p>Welcome! <span> User</span>!</p>
+      <p>Welcome! <span th:text="${}"></span>!</p>
     </div>
     <div class="nav-items">
       <li><a href="../profile.html">Profile</a></li>
-      <li><a th:href="request.html">Log Request</a></li>
-      <li><a th:href="@{/allrequests}">History</a></li>
+      <li><a th:href="@{/user/request}">Log Request</a></li>
+      <li><a th:href="@{/user/allrequests}">History</a></li>
       <li><a href="../wallet.html">Wallet</a></li>
       <li><a href="transact.html">Transactions</a></li>
       <li><a th:href="@{/logout}">Logout</a></li>

@@ -8,9 +8,15 @@ import java.util.List;
 
 @Service
 public interface UserService {
-        void CreateUser(UserDTO user);
-        void UpdateUser(Users user);
+        void CreateBuyer(UserDTO user);
+
+    void UpdateUser(Users user);
         Users GetUser(String id);
         List<Users> GetAllUsers();
         String DeleteUser(String id);
+
+    Users findByEmail(String email);
+
+    void CreateMerchant(UserDTO userDTO);
+
 }

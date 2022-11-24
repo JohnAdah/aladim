@@ -33,8 +33,8 @@
                         <div style="display: -ms-flex">
                             <p>N<span th:text="${request.requestMinPrice}"></span> - N<span th:text="${request.requestMaxPrice}"></span></p>
                         </div>
-                        <a th:href="@{/view/details/request/{requestId}/view(requestId=${request.requestId})}" class="btn btn-success mt3">View Details</a>
-                        <a th:href="@{/view/merchant/responses/{requestId}/view(requestId=${request.requestId})}" class="btn btn-success mt3">Proposals</a>
+                        <a th:href="@{/user/view/details/request/{requestId}/view(requestId=${request.requestId})}" class="btn btn-success mt3">View Details</a>
+                        <a th:href="@{/user/view/merchant/responses/{requestId}/view(requestId=${request.requestId})}" class="btn btn-success mt3">Proposals</a>
                     </div>
                 </div>
 

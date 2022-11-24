@@ -1,12 +1,12 @@
 package com.trader.smarttrade.Entities;
 
 import com.trader.smarttrade.Enums.IdentityType;
-import com.trader.smarttrade.Enums.UserRole;
 import com.trader.smarttrade.Utils.IdGenerator;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Getter
@@ -54,15 +54,20 @@ public class Users {
     @Embedded
     private Address homeAddress;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "roles")
-    private UserRole role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<UserRequest> requests;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     private List<MerchantResponse> responses;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
+    )
+    private List<Role> roles = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wallet_id", referencedColumnName = "wallet_id")

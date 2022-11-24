@@ -4,7 +4,6 @@ package com.trader.smarttrade.RepositoryTest;
 import com.trader.smarttrade.Entities.Address;
 import com.trader.smarttrade.Entities.Users;
 import com.trader.smarttrade.Enums.IdentityType;
-import com.trader.smarttrade.Enums.UserRole;
 import com.trader.smarttrade.Repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

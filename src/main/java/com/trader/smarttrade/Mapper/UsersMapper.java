@@ -15,8 +15,7 @@ public class UsersMapper {
                 .homeAddress(newUser.getHomeAddress())
                 .phoneNumber(newUser.getPhoneNumber())
                 .idNumber(newUser.getIdNumber())
-                .idType(newUser.getIdType())
-                .role(newUser.getRole()).build();
+                .idType(newUser.getIdType()).roles(newUser.getRole()).build();
     }
 
     public static UserDTO UserToUserDTO(Users newUser){
@@ -29,7 +28,6 @@ public class UsersMapper {
                 .homeAddress(newUser.getHomeAddress())
                 .phoneNumber(newUser.getPhoneNumber())
                 .idNumber(newUser.getIdNumber())
-                .idType(newUser.getIdType())
-                .role(newUser.getRole()).build();
+                .idType(newUser.getIdType()).role(newUser.getRoles()).build();
     }
 }

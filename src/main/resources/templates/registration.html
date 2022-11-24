@@ -99,20 +99,6 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="col" style="display: flex;justify-content: space-evenly;">
-                        <div class="md-3 col">
-                            <p>Select your trading option </p>
-                        </div>
-                        <div class="mb-3 col">
-                            <select class="form-select" id="role"name="role">
-                                <option th:each="roleOption : ${T(com.trader.smarttrade.Enums.UserRole).values()}"
-                                        th:value="${roleOption}" th:text="${roleOption}"></option>
-                            </select>
-                        </div>
-                    </div>
-
-
                     <div class="mt-4">
                         <button type="submit" id="submit-btn" class="btn-success">Submit</button>
                     </div>

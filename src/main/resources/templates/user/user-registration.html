@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="header :: header"></div>
+
+<body>
+<div>
+  <div th:replace="header :: navbar"></div>
+</div>
+
+
+<div class="container" style="padding-top: 50px;">
+  <div class="row col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="text-left">Register User</h2>
+      </div>
+      <div class="card-body">
+        <form role="form" method="post" th:action="@{/register/buyer}" th:object="${registerUser}">
+          <div>
+            <div class="row">
+              <div class="mb-3 col">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" th:field="*{firstName}" />
+              </div>
+              <p th:if="${#fields.hasErrors('firstName')}" class="text-danger"
+              th:errors="*{firstName}"></p>
+              <div class="mb-3 col">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" th:field="*{lastName}"/>
+              </div>
+              <p th:if="${#fields.hasErrors('lastName')}" class="text-danger"
+                 th:errors="*{lastName}"></p>
+            </div>
+          </div>
+          <div>
+            <div class="row">
+              <div class="mb-3 col">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" id="userName" name="userName" th:field="*{userName}" />
+              </div>
+              <p th:if="${#fields.hasErrors('userName')}" class="text-danger"
+                 th:errors="*{userName}"></p>
+              <div class="mb-3 col">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" th:field="*{password}" />
+              </div>
+              <p th:if="${#fields.hasErrors('password')}" class="text-danger"
+                 th:errors="*{password}"></p>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Address Line 1</label>
+            <input type="text" class="form-control" id="addressLine1" name="addressLine1" th:field="*{homeAddress.addressLine1}" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Address Line 2</label>
+            <input type="text" class="form-control" id="addressLine2" name="addressLine2" th:field="*{homeAddress.addressLine2}" required/>
+          </div>
+          <div class="row" style="display: flex ; justify-content: space-between ; ">
+            <div class="mb-3 col">
+              <label class="form-label">local Government Area</label>
+              <input type="text" class="form-control" id="localGovArea" name="localGovArea" th:field="*{homeAddress.localGovArea}" required/>
+            </div>
+            <div class="mb-3 col">
+              <label class="form-label">City</label>
+              <input type="text" class="form-control" id="city" name="city" th:field="*{homeAddress.city}" required/>
+            </div>
+
+          </div>
+          <div class="row" style="display: flex ; justify-content: space-between ; align-items:center ">
+            <div class="mb-3 col">
+              <label class="form-label">State</label>
+              <input type="text" class="form-control" id="stateOfCity" name="stateOfCity" th:field="*{homeAddress.stateOfCity}" required/>
+            </div>
+            <div class="mb-3 col">
+              <label class="form-label">Country</label>
+              <input type="text" class="form-control" id="country" name="country" th:field="*{homeAddress.country}" required/>
+            </div>
+            <div class="mb-3 col">
+              <label class="form-label">Postal Code</label>
+              <input type="text" class="form-control" id="postalCode" name="postalCode" th:field="*{homeAddress.postalCode}" required/>
+            </div>
+          </div>
+          <div class="row" style="display: flex ; justify-content: space-between ; align-items:center ">
+            <div class="mb-3 col">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" th:field="*{email}" />
+            </div>
+            <p th:if="${#fields.hasErrors('email')}" class="text-danger"
+               th:errors="*{email}"></p>
+            <div class="mb-3 col">
+              <label class="form-label">Mobile Number</label>
+              <input type="phone" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" />
+            </div>
+            <p th:if="${#fields.hasErrors('phoneNumber')}" class="text-danger"
+               th:errors="*{phoneNumber}"></p>
+          </div>
+
+
+          <div class="row" style="display: flex ; justify-content: space-between ; align-items:center ">
+            <div class="mb-3 col">
+              <label class="form-label">Identification Number</label>
+              <input type="number" class="form-control" id="idNumber" name="idNumber" th:field="*{idNumber}"/>
+            </div>
+            <p th:if="${#fields.hasErrors('idNumber')}" class="text-danger"
+               th:errors="*{idNumber}"></p>
+            <div class="mb-3 col">
+              <label class="form-label">ID Type</label>
+              <select class="form-select" id="idType"name="idType">
+                <option th:each="idTypeOption : ${T(com.trader.smarttrade.Enums.IdentityType).values()}"
+                        th:value="${idTypeOption}" th:text="${idTypeOption}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="mt-4">
+            <button type="submit" id="submit-btn" class="btn-success">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="footer :: footer"></div>
+
+</body>
+</html>

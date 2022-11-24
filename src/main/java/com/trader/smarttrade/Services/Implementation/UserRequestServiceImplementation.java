@@ -6,10 +6,12 @@ import com.trader.smarttrade.Entities.*;
 import com.trader.smarttrade.Mapper.MerchantResponseMapper;
 import com.trader.smarttrade.Mapper.UserRequestMapper;
 import com.trader.smarttrade.Repositories.MerchantResponseRepository;
+import com.trader.smarttrade.Repositories.UserRepository;
 import com.trader.smarttrade.Repositories.UserRequestRepository;
 import com.trader.smarttrade.Services.UserRequestService;
 import com.trader.smarttrade.Utils.IdGenerator;
 import com.trader.smarttrade.Utils.SaveImage;
+import com.trader.smarttrade.Utils.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -27,10 +29,20 @@ public class UserRequestServiceImplementation implements UserRequestService {
 
     private MerchantResponseRepository merchantRepo;
 
-    public UserRequestServiceImplementation(UserRequestRepository userRequestRepo, MerchantResponseRepository merchantRepo) {
+    private UserRepository userRepo;
+
+
+
+    public UserRequestServiceImplementation(UserRequestRepository userRequestRepo,
+                                            MerchantResponseRepository merchantRepo,
+                                            UserRepository userRepo) {
         this.userRequestRepo = userRequestRepo;
         this.merchantRepo = merchantRepo;
+        this.userRepo = userRepo;
     }
+
+
+
 
 
 
@@ -40,9 +52,8 @@ public class UserRequestServiceImplementation implements UserRequestService {
         String requestId = IdGenerator.customIdGenerator(prefix,200,300);
         userRequestDTO.setRequestId(requestId);
 
-        Users user = new Users();
-        user.setUserId("USR211122100045169");
-
+        String email = SecurityUtils.getCurrentUser().getUsername();
+        Users user = userRepo.findByEmail(email);
 
         UserRequest dbUserRequest = UserRequestMapper.UserRequestDtoToUserRequest(userRequestDTO);
         dbUserRequest.setUser(user);
@@ -54,6 +65,11 @@ public class UserRequestServiceImplementation implements UserRequestService {
     @Override
     public List<UserRequestDTO> allUserRequests(String userId)
     {
+        String email = SecurityUtils.getCurrentUser().getUsername();
+        Users user = userRepo.findByEmail(email);
+
+        userId  = user.getUserId();
+
         List<UserRequest> allUserRequest = userRequestRepo.findAllById(userId);
 
         return allUserRequest.stream().map(UserRequestMapper::UserRequestToUserRequestDto)

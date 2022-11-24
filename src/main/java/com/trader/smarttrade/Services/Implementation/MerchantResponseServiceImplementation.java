@@ -9,10 +9,14 @@ import com.trader.smarttrade.Entities.Users;
 import com.trader.smarttrade.Mapper.MerchantResponseMapper;
 import com.trader.smarttrade.Mapper.UserRequestMapper;
 import com.trader.smarttrade.Repositories.MerchantResponseRepository;
+import com.trader.smarttrade.Repositories.UserRepository;
 import com.trader.smarttrade.Repositories.UserRequestRepository;
 import com.trader.smarttrade.Services.MerchantResponseService;
 import com.trader.smarttrade.Utils.IdGenerator;
 import com.trader.smarttrade.Utils.SaveImage;
+import com.trader.smarttrade.Utils.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,13 +29,20 @@ import java.util.stream.Collectors;
 public class MerchantResponseServiceImplementation implements MerchantResponseService {
 
     private MerchantResponseRepository merchantRepo;
-    private UserRequestRepository userRepo;
+    private UserRequestRepository requestRepository;
+
+    private UserRepository userRepo;
+
 
     public MerchantResponseServiceImplementation(MerchantResponseRepository merchantRepo,
-                                                 UserRequestRepository userRepo){
+                                                 UserRequestRepository requestRepository,
+                                                 UserRepository userRepo
+                                                 ){
         this.merchantRepo = merchantRepo;
+        this.requestRepository = requestRepository;
         this.userRepo = userRepo;
     }
+
 
 
     @Override
@@ -39,8 +50,10 @@ public class MerchantResponseServiceImplementation implements MerchantResponseSe
         String prefix = "RS";
         String responseId = IdGenerator.customIdGenerator(prefix,600,800);
         responseDTO.setResponseId(responseId);
-        Users user = new Users();
-        user.setUserId("USR211122100132196");
+
+        String email = SecurityUtils.getCurrentUser().getUsername();
+        Users user = userRepo.findByEmail(email);
+
         responseDTO.setUser(user);
         responseDTO.setImageUrl(SaveImage.imageResponsePath(file));
         MerchantResponse response = MerchantResponseMapper.MerchantResponseDtoToMerchantResponse(responseDTO);
@@ -50,14 +63,14 @@ public class MerchantResponseServiceImplementation implements MerchantResponseSe
 
     @Override
     public List<UserRequestDTO> viewRequests() {
-        List<UserRequest> userRequestDTOList = userRepo.findAll();
+        List<UserRequest> userRequestDTOList = requestRepository.findAll();
         return userRequestDTOList.stream().map(UserRequestMapper::UserRequestToUserRequestDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public UserRequestDTO viewOneRequest(String id){
-        Optional<UserRequest> request = Optional.of(userRepo.findById(id).orElseThrow());
+        Optional<UserRequest> request = Optional.of(requestRepository.findById(id).orElseThrow());
         UserRequestDTO requestDTO =  UserRequestMapper.UserRequestToUserRequestDto(request.orElseThrow());
         return requestDTO;
     }

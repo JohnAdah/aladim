@@ -68,7 +68,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/register/merchant")
-    public String registerMerchant(@Valid @ModelAttribute UserDTO userDTO,
+    public String registerMerchant(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
                                    BindingResult result,
                                    Model model){
         Users userExist = userService.findByEmail(userDTO.getEmail());
@@ -92,7 +92,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/register/buyer")
-    public String registerBuyer(@Valid @ModelAttribute UserDTO userDTO,
+    public String registerBuyer(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
                                 BindingResult result,
                                 Model model){
         Users userExist = userService.findByEmail(userDTO.getEmail());

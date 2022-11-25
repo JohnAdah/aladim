@@ -25,9 +25,9 @@
     </div>
   </div>
 
-  <div style="display: flex">
+  <div style="display: flex" >
     <div>
-      <p>Welcome! <span th:text="${}"></span>!</p>
+      <p>Welcome! <span th:text="${#httpSession.getAttribute(#request.userPrincipal.getName())}"></span>!</p>
     </div>
     <div class="nav-items">
       <li><a href="../profile.html">Profile</a></li>

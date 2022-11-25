@@ -107,6 +107,7 @@ nav .search-icon{
 @media (max-width: 1140px){
     nav{
         padding: 0px;
+        margin-bottom: 50px;
     }
     nav .logo{
         flex: 2;

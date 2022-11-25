@@ -22,7 +22,7 @@ public class UserDTO {
 
     private String userId;
 
-    @NotEmpty
+    @NotEmpty(message = "Username cannot be blank")
     private String userName;
 
     @NotEmpty

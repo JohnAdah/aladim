@@ -10,9 +10,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -51,7 +53,6 @@ public class RegistrationController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String obj = auth.getName();
         Users dbUser = userService.findByEmail(obj);
-        model.addAttribute("userKey",dbUser);
         if(dbUser.getRoles().stream().anyMatch(role -> role.getName().equals("BUYER"))){
 
             return "/user/dashboard";
@@ -74,14 +75,15 @@ public class RegistrationController {
 
     @PostMapping("/register/merchant")
     public String registerMerchant(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
-                                   BindingResult result,
+                                   BindingResult result, Errors Error, RedirectAttributes redirectAttributes,
                                    Model model){
         Users userExist = userService.findByEmail(userDTO.getEmail());
         if(userExist != null && userExist.getEmail() != null){
-            result.rejectValue("email",null,"The User already exist");
+            Error.rejectValue("email",null,"The User already exist");
         }
         if(result.hasErrors()){
-            model.addAttribute("userDTO",userDTO);
+            redirectAttributes.addFlashAttribute("Wrong Entry in One of the fields");
+            model.addAttribute("registerUser",userDTO);
             return "merchant/merchant-registration";
         }
         userService.CreateMerchant(userDTO);
@@ -92,12 +94,12 @@ public class RegistrationController {
     @GetMapping("register/buyer")
     public String showRegistrationBuyerPage(Model model){
         UserDTO userDTO = new UserDTO();
-        model.addAttribute("registerUser",userDTO);
+        model.addAttribute("regKey",userDTO);
         return "user/user-registration";
     }
 
     @PostMapping("/register/buyer")
-    public String registerBuyer(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
+    public String registerBuyer(@Valid @ModelAttribute UserDTO userDTO,
                                 BindingResult result,
                                 Model model){
         Users userExist = userService.findByEmail(userDTO.getEmail());
@@ -105,7 +107,7 @@ public class RegistrationController {
             result.rejectValue("email",null,"The User already exist");
         }
         if(result.hasErrors()){
-            model.addAttribute("registerUser",userDTO);
+            model.addAttribute("regKey",userDTO);
             return "user/user-registration";
         }
         userService.CreateBuyer(userDTO);

@@ -11,8 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,9 +40,13 @@ public class UserRequestController {
 
     //Handler method to handle the post request from the new-request webpage
     @PostMapping("/user/new/request")
-    public String postRequest(@ModelAttribute UserRequestDTO request,
-                              Model model,@RequestParam("file") MultipartFile file) throws IOException {
-
+    public String postRequest(@ModelAttribute UserRequestDTO request, Errors error, RedirectAttributes redirectAttributes,
+                              Model model, @RequestParam("file") MultipartFile file) throws IOException {
+        if(request.getRequestMaxPrice() < request.getRequestMinPrice()){
+            error.rejectValue("email",null,"There is an error in a field!");
+            redirectAttributes.addFlashAttribute("The Min. Price cannot be greater than the Max. Price");
+            return "redirect:/user/request";
+        }
         UserRequest dbRequest = userRequestService.newRequest(request, file);
         List<UserRequestDTO> requestDTO = userRequestService
                 .allUserRequests(dbRequest.getUser().getUserId());

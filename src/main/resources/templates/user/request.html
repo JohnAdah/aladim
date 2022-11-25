@@ -22,12 +22,16 @@
                                 <label class="form-label">Title</label>
                                 <input type="text" class="form-control" id="title" name="title" th:field="*{title}" />
                             </div>
+                            <p th:if="${#fields.hasErrors('title')}" th:errorclass="ui-state-error"
+                               th:errors="*{title}"></p>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Decription</label>
+                            <label class="form-label">Description</label>
                             <textarea class="form-control" row="5" cols="25" id="description" placeholder="Decribe details of product or service required here"
                                       th:field="*{description}"></textarea>
                         </div>
+                        <p th:if="${#fields.hasErrors('description')}" th:errorclass="ui-state-error"
+                           th:errors="*{description}"></p>
                     </div>
 
 
@@ -36,10 +40,14 @@
                             <label class="form-label">Min. Price</label>
                             <input type="number" class="form-control" id="minPrice" name="minPrice" th:field="*{requestMinPrice}" />
                         </div>
+                        <p th:if="${#fields.hasErrors('resquestMinPrice')}" th:errorclass="ui-state-error"
+                           th:errors="*{requestMinPrice}"></p>
                         <div class="mb-2 col">
                             <label class="form-label">Max. Price</label>
                             <input type="number" class="form-control" id="maxPrice" name="maxPricer" th:field="*{requestMaxPrice}" />
                         </div>
+                        <p th:if="${#fields.hasErrors('requestMaxPrice')}" th:errorclass="ui-state-error"
+                           th:errors="*{requestMaxPrice}"></p>
                         <div class="mb-3 col">
                             <label class="form-label">Category</label>
                             <select  class="form-select"name="category", id="category">
@@ -58,7 +66,8 @@
                         <div class="ui-icon-image">
                             <img id="frame" src="" class="img-fluid" />
                         </div>
-
+                        <p th:if="${#fields.hasErrors('imageUrl')}" th:errorclass="ui-state-error"
+                           th:errors="*{imageUrl}"></p>
                     </div>
 
 

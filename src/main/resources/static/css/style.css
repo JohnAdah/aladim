@@ -183,14 +183,6 @@ nav .logo.space{
     justify-content: space-between;
 }
 
-.hero-box{
-    width: 100%;
-    height: 100vh;
-    background-image: url("/static/webImage/main.jpg");
-    background-size: cover;
-    position: relative;
-}
-
 .hero-box-overlay{
     position: absolute;
     width: 100%;
@@ -199,6 +191,15 @@ nav .logo.space{
     color: #fff;
 }
 
+
+
+.hero-box{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../webImage/main.jpg");
+    background-size: cover;
+    position: relative;
+}
 
 
 .marble>*{

@@ -4,9 +4,13 @@ import com.trader.smarttrade.DTOs.MerchantResponseDTO;
 import com.trader.smarttrade.DTOs.UserRequestDTO;
 import com.trader.smarttrade.Entities.MerchantResponse;
 import com.trader.smarttrade.Entities.UserRequest;
+import com.trader.smarttrade.Entities.Users;
 import com.trader.smarttrade.Services.MerchantResponseService;
+import com.trader.smarttrade.Services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +25,12 @@ public class MerchantResponseController {
     private static final Logger log = LoggerFactory.getLogger(MerchantResponseController.class);
 
     private MerchantResponseService merchantResponseService;
+    private UserService userService;
 
-    public MerchantResponseController(MerchantResponseService merchantResponseService){
+    public MerchantResponseController(MerchantResponseService merchantResponseService,
+                                      UserService userService){
         this.merchantResponseService = merchantResponseService;
+        this.userService = userService;
     }
 
     @GetMapping("/merchant/response/{requestId}")
@@ -80,4 +87,14 @@ public class MerchantResponseController {
     }
 
 
+    @GetMapping("/merchant/all/response")
+    public String viewAllResponses(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String obj = auth.getName();
+        Users dbUser = userService.findByEmail(obj);
+        List<MerchantResponseDTO> merchantResponseDTO = merchantResponseService
+                .viewAllResponses(dbUser.getUserId());
+        model.addAttribute("response",merchantResponseDTO);
+        return "merchant/merchant-all-responses";
+    }
 }

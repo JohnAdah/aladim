@@ -9,14 +9,17 @@
 </div>
 
 
-<div class="container" style="padding-top: 50px; margin-top: 20px; margin-bottom: 20px;">
+<div class="container" style="padding-top: 50px; margin-top: 40px; margin-bottom: 40px;">
   <div class="row col-md-8 offset-md-2">
+    <div th:if="${param.error}">
+      <div class="alert alert-danger">Invalid Entry in a field</div>
+    </div>
     <div class="card">
       <div class="card-header">
         <h2 class="text-left">Register User</h2>
       </div>
       <div class="card-body">
-        <form role="form" method="post" th:action="@{/register/merchant}" th:object="${userDTO}">
+        <form role="form" method="post" th:action="@{/register/merchant}" th:object="${registerUser}">
           <div>
             <div class="row">
               <div class="mb-3 col">

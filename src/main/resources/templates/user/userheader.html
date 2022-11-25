@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:fragment="userheader">
   <meta charset="UTF-8">
   <title>User Page</title>
@@ -27,7 +27,7 @@
 
   <div style="display: flex" >
     <div>
-      <p>Welcome! <span th:text="${#httpSession.getAttribute(#request.userPrincipal.getName())}"></span>!</p>
+      <p>Welcome! <span sec:authentication="principal.username"></span>!</p>
     </div>
     <div class="nav-items">
       <li><a href="../profile.html">Profile</a></li>

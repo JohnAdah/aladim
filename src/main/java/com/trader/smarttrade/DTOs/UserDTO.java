@@ -1,7 +1,6 @@
 package com.trader.smarttrade.DTOs;
 
 
-import com.sun.istack.NotNull;
 import com.trader.smarttrade.Entities.Address;
 import com.trader.smarttrade.Entities.Role;
 import com.trader.smarttrade.Enums.IdentityType;
@@ -12,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -22,7 +22,7 @@ public class UserDTO {
 
     private String userId;
 
-    @NotEmpty(message = "Username cannot be blank")
+    @NotNull(message = "Username cannot be blank")
     private String userName;
 
     @NotEmpty
@@ -31,7 +31,7 @@ public class UserDTO {
     @NotEmpty
     private String lastName;
 
-    @NotEmpty(message = "Email should not be empty")
+    @NotNull(message = "Email should not be empty")
     @Email
     private String email;
 

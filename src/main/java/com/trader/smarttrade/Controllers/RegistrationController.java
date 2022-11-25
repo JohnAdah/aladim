@@ -45,16 +45,21 @@ public class RegistrationController {
     }
 
     @GetMapping("/render/user/page")
-    public String returnUserPage(){
+    public String returnUserPage(@ModelAttribute UserDTO userDTO,
+                                 Model model){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String obj = auth.getName();
         Users dbUser = userService.findByEmail(obj);
+        model.addAttribute("userKey",dbUser);
         if(dbUser.getRoles().stream().anyMatch(role -> role.getName().equals("BUYER"))){
+
             return "/user/dashboard";
         }else if(dbUser.getRoles().stream().anyMatch(role -> role.getName().equals("MERCHANT"))){
+
             return "/merchant/dashboard";
         }else
+
             return "/admin/dashboard";
     }
 
@@ -76,7 +81,7 @@ public class RegistrationController {
             result.rejectValue("email",null,"The User already exist");
         }
         if(result.hasErrors()){
-            model.addAttribute("registerUser",userDTO);
+            model.addAttribute("userDTO",userDTO);
             return "merchant/merchant-registration";
         }
         userService.CreateMerchant(userDTO);

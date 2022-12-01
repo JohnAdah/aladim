@@ -4,17 +4,18 @@ import com.trader.smarttrade.DTOs.UserDTO;
 import com.trader.smarttrade.Entities.Role;
 import com.trader.smarttrade.Entities.Users;
 import com.trader.smarttrade.Entities.Wallet;
+import com.trader.smarttrade.Exceptions.ResourceNotFoundException;
 import com.trader.smarttrade.Mapper.UsersMapper;
 import com.trader.smarttrade.Repositories.RoleRepository;
 import com.trader.smarttrade.Repositories.UserRepository;
 import com.trader.smarttrade.Services.UserService;
 import com.trader.smarttrade.Utils.IdGenerator;
-import com.trader.smarttrade.Utils.SecurityUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -86,8 +87,16 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public Users GetUser(String id) {
-        return null;
+    public UserDTO GetUser(String id) {
+
+        Users user = userRepo.findById(id).get();
+        if(user != null){
+            UserDTO userDto = UsersMapper.UserToUserDTO(user);
+            return userDto;
+        }else{
+            throw new ResourceNotFoundException("The resource is not available");
+        }
+
     }
 
     @Override

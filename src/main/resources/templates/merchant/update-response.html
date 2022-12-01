@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="merchant/merchantheader :: merchantheader"></div>
+
+<body>
+<div>
+  <div th:replace="merchant/merchantheader :: merchantnavbar"></div>
+</div>
+
+<div class="" style="display: grid; margin-top: 80px; margin-bottom: 40px; grid-template-columns: 1fr 5fr;">
+  <div style="background-color: lightgrey;"></div>
+  <div>
+    <div class="container" style="padding-top: 50px; padding-bottom: 20px;">
+      <div class="row col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="text-left">Update Proposal</h2>
+          </div>
+          <div class="card-body">
+            <form role="form" method="post" enctype="multipart/form-data"
+                  th:action="@{/merchant/update/response/{responseId}(responseId=${response.responseId})}"
+                  th:object="${response}">
+
+              <input type="hidden" th:field="*{responseDate}">
+              <input type="hidden" th:field="*{request}">
+              <input type="hidden" th:field="*{user}">
+
+              <div>
+                <div>
+                  <p>Request ID: <span th:text="${response.request.requestId}"></span></p>
+                </div>
+                <input type="hidden" name="requestId" th:value="${response.request.requestId}"/>
+
+                <div class="mb-3" >
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" row="5" cols="25" id="description"
+                            placeholder="Describe details of product or service here"
+                            th:field="*{responseDescription}" required></textarea>
+                </div>
+                <p th:if="${#fields.hasErrors('responseDescription')}" th:errorclass="ui-state-error"
+                   th:errors="*{responseDescription}"></p>
+              </div>
+
+
+              <div class="row" style="display: flex ; justify-content: space-between ; align-items:center ">
+
+                <div class="mb-2 col">
+                  <label class="form-label">Max. Price</label>
+                  <input type="number" class="form-control" id="maxPrice" name="maxPricer"
+                         th:field="*{responsePrice}" required/>
+                </div>
+                <p th:if="${#fields.hasErrors('responsePrice')}" th:errorclass="ui-state-error"
+                   th:errors="*{responsePrice}"></p>
+              </div>
+              <div>
+                <div class="mb-3 col">
+                  <label class="form-label">Select sample image of product</label>
+                  <input class="form-control" name="file" type="file" id="formFile" onchange="preview()">
+                  <button onclick="clearImage()" class="btn btn-dark mt-3" th:field="*{imageUrl}" hidden>Click me</button>
+                </div>
+                <div class="ui-icon-image">
+                  <img id="frame" src="" class="img-fluid" />
+                </div>
+
+              </div>
+              <p th:if="${#fields.hasErrors('imageUrl')}" th:errorclass="ui-state-error"
+                 th:errors="*{imageUrl}"></p>
+
+
+              <div class="mt-4">
+                <button type="submit" id="submit-btn" class="btn btn-success mt3">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function preview() {
+    frame.src = URL.createObjectURL(event.target.files[0]);
+
+  }
+  function clearImage() {
+    document.getElementById('formFile').value = null;
+    frame.src = "";
+  }
+</script>
+
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

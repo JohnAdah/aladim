@@ -9,7 +9,7 @@
     <div th:replace="merchant/merchantheader :: merchantnavbar"></div>
 </div>
 
-<div class="" style="display: grid; grid-template-columns: 1fr 5fr;height: auto;">
+<div class="" style="display: grid; margin-top: 50px; grid-template-columns: 1fr 5fr;height: auto;">
     <div style="background-color: grey;"></div>
     <div>
         <div class="container" style="padding-top: 50px;">
@@ -27,7 +27,10 @@
                             <h5 th:text="${request.title}"></h5>
                         </div>
                         <div class="mb-5 col">
-                            <p th:text="${request.requestDate}"></p>
+                            <p>Requested Date: <span th:text="${request.requestDate}"></span></p>
+                        </div>
+                        <div class="">
+                            <p>Requested By: <span th:text="${request.user.firstName}"></span></p>
                         </div>
                     </div>
                     <div class="card-body"

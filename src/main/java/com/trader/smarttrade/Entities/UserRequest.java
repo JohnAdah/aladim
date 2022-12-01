@@ -4,9 +4,9 @@ import com.trader.smarttrade.Enums.Category;
 import com.trader.smarttrade.Utils.IdGenerator;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +26,12 @@ public class UserRequest {
         @Column(name = "title")
         private String title;
 
-        @CreationTimestamp()
+        @UpdateTimestamp
+        @Column(name = "updated_date")
+        private Date updatedDate;
+
+
+        @CreationTimestamp
         @Column(name="request_date")
         private Date requestDate;
 

@@ -6,13 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -25,7 +22,11 @@ public class MerchantResponseDTO {
 
     private UserRequest request;
 
-    private LocalDate responseDate;
+    @DateTimeFormat(pattern = "dd-mm-yy HH:MM")
+    private Date responseDate;
+
+    @DateTimeFormat(pattern = "dd-mm-yy HH:MM")
+    private Date updatedDate;
 
     @NotEmpty(message = "A price must be stated")
     private Double responsePrice;
@@ -33,6 +34,6 @@ public class MerchantResponseDTO {
     @NotEmpty(message = "A description must be given")
     private String responseDescription;
 
-    @NotEmpty(message = "A sample image needs to be uploded")
+    @NotEmpty(message = "A sample image needs to be uploaded")
     private String imageUrl;
 }

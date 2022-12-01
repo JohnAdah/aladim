@@ -9,7 +9,7 @@
 </div>
 
 
-<div class="" style="display: grid; grid-template-columns: 1fr 5fr;">
+<div class="" style="display: grid;  margin-top: 50px; grid-template-columns: 1fr 5fr;">
     <div style="background-color: lightgrey;"></div>
     <div>
         <div class="container" style="padding-top: 50px;">
@@ -21,7 +21,8 @@
                 <div class="card" style="margin-bottom: 10px;" th:each="response, responseStat:${key}">
                     <div class="card-header" style="display: flex; padding-top: 5px;margin: 10px;">
                         <div class="mb-5 col-sm-8" style="display: -ms-flexbox; height: fit-content;">
-                            <p th:text="${response.responseId}"></p>
+                            <p>Response ID: <span th:text="${response.responseId}"></span></p>
+                            <p>Merchant: <span th:text="${response.user.firstName}"></span></p>
                             <h5 th:text="${response.request.title}"></h5>
                         </div>
                         <div class="mb-5 col">

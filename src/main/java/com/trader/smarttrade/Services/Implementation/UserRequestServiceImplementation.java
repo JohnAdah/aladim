@@ -112,4 +112,22 @@ public class UserRequestServiceImplementation implements UserRequestService {
                 .MerchantResponseToMerchantResponseDTO(response);
         return responseDTO;
     }
+
+    @Override
+    public UserRequest updateRequest(UserRequestDTO req, MultipartFile file) {
+        UserRequest request = UserRequestMapper.UserRequestDtoToUserRequest(req);
+        request.setImageUrl(SaveImage.imagePath(file));
+        userRequestRepo.save(request);
+        return request;
+    }
+
+    @Override
+    public void deleteRequest(String id) {
+        Optional<UserRequest> userRequest = userRequestRepo.findById(id);
+        if(userRequest != null){
+            userRequestRepo.deleteById(id);
+        }
+      log.info("Request Deleted");
+    }
+
 }

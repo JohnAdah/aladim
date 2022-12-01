@@ -29,11 +29,13 @@
             <div class="card-body">
                 <div style="display: -ms-flex; justify-content: space-evenly;">
                     <!--Title-->
-                    <h4 class="card-title" th:text="${response.responseId}">1 Card title</h4>
-                    <h4 class="card-title" th:text="${response.responseDate}"> Date of entry</h4>
+                    <h4 class="card-title">Response ID: <span  th:text="${response.responseId}"></span></h4>
+                    <h4 class="card-title" >Request Date: <span th:text="${response.responseDate}"></span></h4>
                 </div>
+                <br>
                 <!--Text-->
-                <p th:text="${response.request.requestId}"></p>
+                <p>Request ID: <span  th:text="${response.request.requestId}"></span></p>
+                <p>Response By: <span th:text="${response.user.firstName}"></span></p>
                 <p th:text="${response.request.title}"><b></b></p>
                 <p class="card-text" th:text="${response.responseDescription}">Some quick example text to build on the card title and make up the bulk of the
                     card's content.</p>

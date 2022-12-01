@@ -9,15 +9,16 @@
 </div>
 
 
-<div class="container" style="padding-top: 50px; margin-top: 20px;">
+<div class="container" style="padding-top: 80px; margin-top: 40px;margin-bottom: 40px;">
   <div class="row col-md-8 offset-md-2">
     <div class="card">
       <div class="card-header">
         <h2 class="text-left">Register User</h2>
       </div>
       <div class="card-body">
-        <form role="form" method="post" th:action="@{/register/buyer}" th:object="${regKey}">
+        <form role="form" onsubmit="return validate()" method="post" th:action="@{/register/buyer}" th:object="${regKey}">
           <div>
+            <label id="emptyError" style="text-decoration: red; visibility: hidden;" >One or more Entry is Empty</label>
             <div class="row">
               <div class="mb-3 col">
                 <label class="form-label">First Name</label>
@@ -45,6 +46,7 @@
                 <label class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" th:field="*{password}" />
               </div>
+              <label id="pwordError" style="text-decoration: red; visibility: hidden;" >password must be greater than 6 letters</label>
               <p th:if="${#fields.hasErrors('password')}" class="text-danger"
                  th:errors="*{password}"></p>
             </div>
@@ -79,13 +81,13 @@
             </div>
             <div class="mb-3 col">
               <label class="form-label">Postal Code</label>
-              <input type="text" class="form-control" id="postalCode" name="postalCode" th:field="*{homeAddress.postalCode}" required/>
+              <input type="number" class="form-control" id="postalCode" name="postalCode" th:field="*{homeAddress.postalCode}" required/>
             </div>
           </div>
           <div class="row" style="display: flex ; justify-content: space-between ; align-items:center ">
             <div class="mb-3 col">
               <label class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" name="email" th:field="*{email}" />
+              <input type="email" class="form-control" id="email" name="email" th:field="*{email}" required/>
             </div>
             <p th:if="${#fields.hasErrors('email')}" class="text-danger"
                th:errors="*{email}"></p>
@@ -93,6 +95,7 @@
               <label class="form-label">Mobile Number</label>
               <input type="phone" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" />
             </div>
+            <label id="pnumError" style="text-decoration: red; visibility: hidden;" >Phone Number must be 11 digits</label>
             <p th:if="${#fields.hasErrors('phoneNumber')}" class="text-danger"
                th:errors="*{phoneNumber}"></p>
           </div>
@@ -114,7 +117,7 @@
             </div>
           </div>
           <div class="mt-4">
-            <button type="submit" id="submit-btn" class="btn-success">Submit</button>
+            <button type="submit" id="submit-btn" class="btn btn-success">Submit</button>
           </div>
         </form>
       </div>

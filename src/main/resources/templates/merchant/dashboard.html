@@ -1,12 +1,27 @@
-<!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      <!DOCTYPE html>
+      <html lang="en"
+            xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<div th:replace="merchant/merchantheader :: merchantheader"></div>
+      <div th:replace="merchant/merchantheader :: merchantheader"></div>
 
-<body>
-<div>
-  <div th:replace="merchant/merchantheader :: merchantnavbar"></div>
-</div>
-</body>
-</html>
+      <body>
+      <div  th:object="${user}">
+        <div th:replace="merchant/merchantheader :: merchantnavbar"></div>
+      </div>
+      <div class="" style="display: grid; margin-top: 80px; grid-template-columns: 1fr 5fr;height: 70vh;" th:object="${user}">
+      <div style="background-color: lightgrey;">
+      </div>
+      <div>
+        <div style="width: 80%;margin: 10px auto;border: 1px solid black; padding: 30px;border-radius: 10px;">
+<!--          <h1 hidden><b>Welcome!  <span sec:authentication="principal.username"></span></b></h1>-->
+            <h1><b>Welcome!  <span th:text="${user.firstName.toUpperCase()}"></span></b></h1>
+          <h3 ><a style="text-decoration: none;" th:href="@{/merchant/all/response}">View your Responses</a></h3>
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <div th:replace="footer :: footer"></div>
+      </body>
+      </html>

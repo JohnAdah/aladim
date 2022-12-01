@@ -1,11 +1,10 @@
 package com.trader.smarttrade.Entities;
 
-import com.trader.smarttrade.Utils.IdGenerator;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -29,7 +28,11 @@ public class MerchantResponse {
 
     @CreationTimestamp
     @Column(name = "date")
-    private LocalDate responseDate;
+    private Date responseDate;
+
+    @UpdateTimestamp
+    @Column(name = "modified_date")
+    private Date updatedDate;
 
     @Column(name = "price")
     private Double responsePrice;

@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <div th:replace="user/userheader :: userheader"></div>
 
 <body>
-<div>
-  <div th:replace="user/userheader :: usernavbar"></div>
+<div th:object="${user}">
+  <div th:replace="user/userheader :: usernavbar" ></div>
+</div>
+
+<div class="" style="display: grid; margin-top: 50px; grid-template-columns: 1fr 5fr;height: 70vh;" th:object="${user}">
+  <div style="background-color: lightgrey;">
+  </div>
+  <div>
+    <div style="width: 80%;margin: 10px auto;border: 1px solid black; padding: 30px;border-radius: 10px;">
+      <h1><b>Welcome!  <span th:text="${user.firstName.toUpperCase()}"></span></b></h1>
+      <h3><a style="text-decoration: none;" th:href="@{/user/request}">Make a request</a></h3>
+    </div>
+  </div>
+</div>
+</div>
+</div>
 </div>
 <div th:replace="footer :: footer"></div>
 </body>

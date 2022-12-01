@@ -9,7 +9,7 @@
     <div th:replace="merchant/merchantheader :: merchantnavbar"></div>
 </div>
 
-<div class="" style="display: grid; grid-template-columns: 1fr 5fr;">
+<div class="" style="display: grid; margin-top: 50px; grid-template-columns: 1fr 5fr;">
     <div style="background-color: lightgrey;"></div>
     <div>
         <div class="container" style="padding-top: 50px; padding-bottom: 20px;">
@@ -31,7 +31,7 @@
                                     <label class="form-label">Description</label>
                                     <textarea class="form-control" row="5" cols="25" id="description"
                                               placeholder="Describe details of product or service here"
-                                              th:field="*{responseDescription}"></textarea>
+                                              th:field="*{responseDescription}" required></textarea>
                                 </div>
                                 <p th:if="${#fields.hasErrors('responseDescription')}" th:errorclass="ui-state-error"
                                    th:errors="*{responseDescription}"></p>
@@ -43,7 +43,7 @@
                                 <div class="mb-2 col">
                                     <label class="form-label">Max. Price</label>
                                     <input type="number" class="form-control" id="maxPrice" name="maxPricer"
-                                           th:field="*{responsePrice}" />
+                                           th:field="*{responsePrice}" required/>
                                 </div>
                                 <p th:if="${#fields.hasErrors('responsePrice')}" th:errorclass="ui-state-error"
                                    th:errors="*{responsePrice}"></p>
@@ -52,7 +52,7 @@
                                 <div class="mb-3 col">
                                     <label class="form-label">Select sample image of product</label>
                                     <input class="form-control" name="file" type="file" id="formFile" onchange="preview()">
-                                    <button onclick="clearImage()" class="btn btn-dark mt-3" th:field="*{imageUrl}">Click me</button>
+                                    <button onclick="clearImage()" class="btn btn-dark mt-3" th:field="*{imageUrl}" hidden>Click me</button>
                                 </div>
                                 <div class="ui-icon-image">
                                     <img id="frame" src="" class="img-fluid" />

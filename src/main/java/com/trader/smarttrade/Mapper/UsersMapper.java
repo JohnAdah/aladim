@@ -3,6 +3,8 @@ package com.trader.smarttrade.Mapper;
 import com.trader.smarttrade.DTOs.UserDTO;
 import com.trader.smarttrade.Entities.Users;
 
+import java.util.Optional;
+
 public class UsersMapper {
 
     public static Users UsersDtoToUsers(UserDTO newUser){

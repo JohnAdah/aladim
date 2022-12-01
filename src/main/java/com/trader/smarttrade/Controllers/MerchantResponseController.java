@@ -50,15 +50,15 @@ public class MerchantResponseController {
     public String newResponse(@ModelAttribute MerchantResponseDTO response, Model model,
                               @RequestParam("requestId") String requestId,
                               @RequestParam("file") MultipartFile file) throws IOException {
+
         UserRequest request = new UserRequest();
         request.setRequestId(requestId);
         response.setRequest(request);
-       // log.info("Logging the request id @ 2: " + response.toString());
+
         MerchantResponse merchantResponse = merchantResponseService.respond(response,file);
-        log.info(merchantResponse.toString());
         List<MerchantResponseDTO> newResponseEntry = merchantResponseService
                 .viewAllResponses(merchantResponse.getUser().getUserId());
-        log.info(newResponseEntry.toString());
+
         model.addAttribute("res",newResponseEntry);
         return "/merchant/allresponse";
     }
@@ -96,5 +96,26 @@ public class MerchantResponseController {
                 .viewAllResponses(dbUser.getUserId());
         model.addAttribute("response",merchantResponseDTO);
         return "merchant/merchant-all-responses";
+    }
+
+    @GetMapping("/merchant/update/response/{responseId}")
+    public String updateResponseForm(@PathVariable("responseId") String responseId, Model model){
+        MerchantResponseDTO response = merchantResponseService.viewOneResponse(responseId);
+        model.addAttribute("response",response);
+        return "/merchant/update-response";
+    }
+
+    @PostMapping("/merchant/update/response/{responseId}")
+    public String updateResponse(@PathVariable("responseId") String responseId,
+                                 @ModelAttribute MerchantResponseDTO response, MultipartFile file){
+        response.setResponseId(responseId);
+        merchantResponseService.updateResponse(response,file);
+        return "redirect:/merchant/all/response";
+    }
+
+    @GetMapping("/merchant/delete/response/{responseId}")
+    public String deleteResponse(@PathVariable("responseId") String responseId){
+        merchantResponseService.deleteResponse(responseId);
+        return "redirect:/merchant/all/response";
     }
 }

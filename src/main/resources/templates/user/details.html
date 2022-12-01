@@ -11,7 +11,7 @@
 <div class="container" style="margin: 50px; width:60%;" th:field="*{requestKey}">
 
     <!-- Card deck -->
-    <div class="card-deck row">
+    <div class="card-deck row" style="padding-top: 50px;">
 
         <!-- Card -->
         <div class="card">
@@ -28,16 +28,20 @@
             <div class="card-body">
                 <div style="display: -ms-flex; justify-content: space-evenly;">
                     <!--Title-->
-                    <h4 class="card-title" th:text="${requestKey.title}">1 Card title</h4>
-                    <h4 class="card-title" th:text="${requestKey.requestDate}"> Date of entry</h4>
+                    <h4 class="card-title">Request ID: <span  th:text="${requestKey.requestId}"></span></h4>
+                    <h4 class="card-title" >Title: <span th:text="${requestKey.title}"></span></h4>
+                    <h4 class="card-title" > Date Submitted: <span th:text="${requestKey.requestDate}"></span></h4>
+
                 </div>
                 <!--Text-->
-                <p th:text="${requestKey.category}"></p>
+                <p >Category: <span th:text="${requestKey.category}"></span></p>
                 <p class="card-text" th:text="${requestKey.description}">Some quick example text to build on the card title and make up the bulk of the
                     card's content.</p>
                 <div>
-                    <button type="button" class="btn btn-primary">Update</button>
-                    <button type="button" class="btn btn-primary">Delete</button>
+                    <a th:href="@{/user/update/request/{requestId}(requestId=${requestKey.requestId})}"
+                       class="btn btn-success mt3">Update</a>
+                    <a th:href="@{/user/delete/request/{requestId}(requestId=${requestKey.requestId})}"
+                       class="btn btn-success mt3">Delete</a>
                 </div>
 
             </div>

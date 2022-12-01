@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="user/userheader :: userheader"></div>
+
+<body>
+<div>
+    <div th:replace="user/userheader :: usernavbar"></div>
+</div>
+
+<div class="" style="display: grid; margin-top: 50px; grid-template-columns: 1fr 5fr;height: 70vh;">
+    <div style="background-color: lightgrey;">
+    </div>
+    <div>
+        <div style="width: 80%;margin: 10px auto;border: 1.5px solid black; padding: 30px;border-radius: 10px;">
+            <h3><b>Deleted Successfully></b></h3>
+            <h3 style="text-decoration: none"><a th:href="@{/user/allrequests}">Go to your Request List</a></h3>
+        </div>
+    </div>
+</div>
+    <div th:replace="footer :: footer"></div>
+
+</body>
+</html>

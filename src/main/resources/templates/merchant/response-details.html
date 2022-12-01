@@ -9,7 +9,7 @@
     <div th:replace="merchant/merchantheader :: merchantnavbar"></div>
 </div>
 
-<div class="container" style="margin: 50px; width:60%;" th:field="*{response}">
+<div class="container" style="margin: 80px; width:50%;" th:field="*{response}">
 
     <!-- Card deck -->
     <div class="card-deck row">
@@ -29,17 +29,18 @@
             <div class="card-body">
                 <div style="display: -ms-flex; justify-content: space-evenly;">
                     <!--Title-->
-                    <h4 class="card-title" th:text="${response.responseId}">1 Card title</h4>
-                    <h4 class="card-title" th:text="${response.responseDate}"> Date of entry</h4>
+                    <h4 class="card-title">RESPONSE ID: <span  th:text="${response.responseId}"></span></h4>
+                    <h4 class="card-title" >DATE: <span th:text="${response.responseDate}"></span></h4>
                 </div>
                 <!--Text-->
-                <p th:text="${response.request.requestId}"></p>
+                <p>REQUEST ID: <span th:text="${response.request.requestId}"></span></p>
                 <p th:text="${response.request.title}"><b></b></p>
-                <p class="card-text" th:text="${response.responseDescription}">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
+                <p class="card-text">DESCRIPTION: <span  th:text="${response.responseDescription}"></span></p>
                 <div>
-                    <button type="button" class="btn btn-primary">Update</button>
-                    <button type="button" class="btn btn-primary">Delete</button>
+                    <a th:href="@{/merchant/update/response/{responseId}(responseId=${response.responseId})}"
+                       class="btn btn-primary mt3">Update</a>
+                    <a th:href="@{/merchant/delete/response/{responseId}(responseId=${response.responseId})}"
+                       class="btn btn-dark mt3">Delete</a>
                 </div>
 
             </div>

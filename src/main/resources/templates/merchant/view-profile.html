@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<div th:replace="merchant/merchantheader :: merchantheader"></div>
+
+<body>
+<div>
+    <div th:replace="merchant/merchantheader :: merchantnavbar"></div>
+</div>
+
+<div class="" style="display: grid; margin-top: 60px; grid-template-columns: 1fr 5fr;height: 100vh;" th:href="${user}">
+    <div style="background-color: lightgrey;">
+    </div>
+    <div>
+        <div style="width: 80%;margin: 10px auto; color: white; border: 1px solid black; padding: 30px;
+        background-color: #3CAEA3; border-radius: 10px;">
+            <div style="margin: 10px;">
+                <div>
+                    <h4>ACCOUNT TYPE: MERCHANT</span></h4>
+                </div>
+                <div style="padding-top: 5px;">
+                    <p>ID: <span th:text="${user.userId}"></span></p>
+                    <p>NAME :<span th:text="${user.firstName.toUpperCase()}">, </span>
+                    <span th:text="${user.lastName.toUpperCase()}"></span></p>
+                    <P>EMAIL :<span th:text="${user.email}"></span></P>
+                    <P>ADDRESS: <span th:text="${user.homeAddress.addressLine1}"></span></P>
+                    <p>        <span th:text="${user.homeAddress.addressLine2}"></span></p>
+                    <P>MOBILE NUMBER: <span th:text="${user.phoneNumber}"></span></P>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

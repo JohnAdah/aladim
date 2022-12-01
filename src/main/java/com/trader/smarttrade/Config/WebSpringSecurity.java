@@ -33,7 +33,7 @@ public class WebSpringSecurity {
                 .antMatchers("/resources/**").permitAll()
                 .antMatchers("/register/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("merchant/view/request").hasAnyRole("MERCHANT","ADMIN")
+                .antMatchers("merchant/**").hasAnyRole("MERCHANT","ADMIN")
                 .antMatchers("/users/**").hasAnyRole("BUYER","ADMIN")
                 .and()
                 .formLogin(form -> form

@@ -9,6 +9,9 @@ public class ResourceNotFoundException extends RuntimeException{
         super(message, cause);
     }
 
+    public ResourceNotFoundException(String message) {
+    }
+
     @Override
     public String getMessage() {
         return super.getMessage();

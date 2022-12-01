@@ -11,7 +11,8 @@ public class MerchantResponseMapper {
                 .responseDate(response.getResponseDate())
                 .user(response.getUser())
                 .imageUrl(response.getImageUrl())
-                .request(response.getRequest()).build();
+                .request(response.getRequest())
+                .updatedDate(response.getUpdatedDate()).build();
     }
 
 
@@ -22,6 +23,7 @@ public class MerchantResponseMapper {
                 .responseDate(response.getResponseDate())
                 .user(response.getUser())
                 .imageUrl(response.getImageUrl())
-                .request(response.getRequest()).build();
+                .request(response.getRequest())
+                .updatedDate(response.getUpdatedDate()).build();
     }
 }

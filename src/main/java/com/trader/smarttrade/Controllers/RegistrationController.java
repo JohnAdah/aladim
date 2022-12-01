@@ -47,20 +47,19 @@ public class RegistrationController {
     }
 
     @GetMapping("/render/user/page")
-    public String returnUserPage(@ModelAttribute UserDTO userDTO,
-                                 Model model){
+    public String returnUserPage(Model model){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String obj = auth.getName();
         Users dbUser = userService.findByEmail(obj);
         if(dbUser.getRoles().stream().anyMatch(role -> role.getName().equals("BUYER"))){
-
+            model.addAttribute("user",dbUser);
             return "/user/dashboard";
         }else if(dbUser.getRoles().stream().anyMatch(role -> role.getName().equals("MERCHANT"))){
-
+            model.addAttribute("user",dbUser);
             return "/merchant/dashboard";
         }else
-
+            model.addAttribute("user",dbUser);
             return "/admin/dashboard";
     }
 
@@ -102,9 +101,16 @@ public class RegistrationController {
     public String registerBuyer(@Valid @ModelAttribute UserDTO userDTO,
                                 BindingResult result,
                                 Model model){
+
         Users userExist = userService.findByEmail(userDTO.getEmail());
         if(userExist != null && userExist.getEmail() != null){
             result.rejectValue("email",null,"The User already exist");
+            return "user/user-registration";
+        }
+
+        if(userDTO.getPassword().length() <= 7){
+            result.rejectValue("password",null,"Password must be greater than 7 letters");
+            return "/user/user-registration";
         }
         if(result.hasErrors()){
             model.addAttribute("regKey",userDTO);

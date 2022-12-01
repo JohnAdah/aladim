@@ -6,6 +6,7 @@ import com.trader.smarttrade.Entities.MerchantResponse;
 import com.trader.smarttrade.Entities.Transact;
 import com.trader.smarttrade.Entities.UserRequest;
 import com.trader.smarttrade.Entities.Users;
+import com.trader.smarttrade.Exceptions.ResourceNotFoundException;
 import com.trader.smarttrade.Mapper.MerchantResponseMapper;
 import com.trader.smarttrade.Mapper.UserRequestMapper;
 import com.trader.smarttrade.Repositories.MerchantResponseRepository;
@@ -15,8 +16,6 @@ import com.trader.smarttrade.Services.MerchantResponseService;
 import com.trader.smarttrade.Utils.IdGenerator;
 import com.trader.smarttrade.Utils.SaveImage;
 import com.trader.smarttrade.Utils.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -76,6 +75,18 @@ public class MerchantResponseServiceImplementation implements MerchantResponseSe
     }
 
     @Override
+    public MerchantResponse updateResponse(MerchantResponseDTO response, MultipartFile file) {
+        Optional<MerchantResponse> respond = merchantRepo.findById(response.getResponseId());
+        if(respond != null){
+            MerchantResponse res = MerchantResponseMapper
+                    .MerchantResponseDtoToMerchantResponse(response);
+            res.setImageUrl(SaveImage.imageResponsePath(file));
+            merchantRepo.save(res);
+            return res;
+        } throw  new ResourceNotFoundException("The response item is null");
+    }
+
+    @Override
     public Transact confirmTransaction() {
         return null;
     }
@@ -94,5 +105,16 @@ public class MerchantResponseServiceImplementation implements MerchantResponseSe
         MerchantResponseDTO responseDTO = MerchantResponseMapper
                 .MerchantResponseToMerchantResponseDTO(response.orElseThrow());
         return responseDTO;
+    }
+
+    @Override
+    public void deleteResponse(String id) {
+        Optional<MerchantResponse> response = merchantRepo.findById("id");
+        if(response != null){
+            merchantRepo.deleteById(id);
+        }else{
+            throw new ResourceNotFoundException("This response does not exist");
+        }
+
     }
 }

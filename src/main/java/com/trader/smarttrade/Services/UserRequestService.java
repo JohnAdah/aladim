@@ -29,4 +29,9 @@ public interface UserRequestService {
     Wallet creditWallet();
 
     MerchantResponseDTO viewOneResponse(String responseId);
+
+
+    UserRequest updateRequest(UserRequestDTO req, MultipartFile file);
+
+    void deleteRequest(String id);
 }

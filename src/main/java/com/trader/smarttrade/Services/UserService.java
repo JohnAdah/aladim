@@ -11,7 +11,7 @@ public interface UserService {
         void CreateBuyer(UserDTO user);
 
     void UpdateUser(Users user);
-        Users GetUser(String id);
+        UserDTO GetUser(String id);
         List<Users> GetAllUsers();
         String DeleteUser(String id);
 

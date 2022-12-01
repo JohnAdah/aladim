@@ -17,10 +17,13 @@ public interface MerchantResponseService {
     List<UserRequestDTO> viewRequests();
 
     UserRequestDTO viewOneRequest(String id);
+    MerchantResponse updateResponse(MerchantResponseDTO response, MultipartFile file);
 
     Transact confirmTransaction();
 
     List<MerchantResponseDTO> viewAllResponses(String id);
 
     MerchantResponseDTO viewOneResponse(String responseId);
+
+    void deleteResponse(String id);
 }

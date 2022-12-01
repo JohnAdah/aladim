@@ -14,7 +14,7 @@ public class UserRequestMapper {
                 .imageUrl(request.getImageUrl())
                 .category(request.getCategory())
                 .description(request.getDescription())
-                .requestDate(request.getRequestDate()).build();
+                .requestDate(request.getRequestDate()).updatedDate(request.getUpdatedDate()).build();
     }
 
     public static UserRequest UserRequestDtoToUserRequest(UserRequestDTO userRequestDTO){
@@ -26,6 +26,7 @@ public class UserRequestMapper {
                 .imageUrl(userRequestDTO.getImageUrl())
                 .category(userRequestDTO.getCategory())
                 .description(userRequestDTO.getDescription())
-                .requestDate(userRequestDTO.getRequestDate()).build();
+                .requestDate(userRequestDTO.getRequestDate())
+                .updatedDate(userRequestDTO.getUpdatedDate()).build();
     }
 }

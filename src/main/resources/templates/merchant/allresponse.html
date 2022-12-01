@@ -9,7 +9,7 @@
     <div th:replace="merchant/merchantheader :: merchantnavbar"></div>
 </div>
 
-<div class="" style="display: grid; grid-template-columns: 1fr 5fr;">
+<div class="" style="display: grid;  margin-top: 50px;grid-template-columns: 1fr 5fr;">
     <div style="background-color: lightgrey;"></div>
     <div>
         <div class="container" style="padding-top: 50px;">
@@ -21,8 +21,11 @@
                 <div class="card" style="margin-bottom: 10px;" th:each="response, responseStat:${res}">
                     <div class="card-header" style="display: flex; padding-top: 5px;margin: 10px;">
                         <div class="mb-5 col-sm-8" style="display: -ms-flexbox; height: fit-content;">
-                            <p th:text="${response.responseId}"></p>
-                            <h5 th:text="${response.request.title}"></h5>
+                            <p>REFERENCE ID: <span th:text="${response.responseId}"></span></p>
+                            <h5>REQUEST: <span th:text="${response.request.title}"></span></h5>
+                            <p>REQUEST BY: <span th:text="${response.request.user.firstName}"> </span>
+                                <span th:text="${response.request.user.lastName}"></span>
+                            </p>
                         </div>
                         <div class="mb-5 col">
                             <p th:text="${response.responseDate}"></p>
